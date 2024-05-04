@@ -1,17 +1,21 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import "./topbar.css";
 
 export default function Topbar({ currentUser }) {
   const PF = "http://localhost:8000";
   const navigate = useNavigate();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userData");
     navigate("/");
     window.location.reload();
-    setTimeout(() => {
-    }, 2000);
+  };
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
   };
 
   return (
@@ -22,7 +26,7 @@ export default function Topbar({ currentUser }) {
         <i className="topIcon fab fa-pinterest-square"></i>
         <i className="topIcon fab fa-twitter-square"></i>
       </div>
-      <div className="topCenter">
+      <div className={`topCenter ${mobileMenuOpen ? "hidden" : ""}`}>
         <ul className="topList">
           <li className="topListItem">
             <Link className="link" to="/">
@@ -46,12 +50,21 @@ export default function Topbar({ currentUser }) {
         </ul>
       </div>
       <div className="topRight">
+        <i className="topSearchIcon fas fa-search"></i>
         {currentUser ? (
           <Link className="link" to="/settings">
             {currentUser.profilePic ? (
-              <img className="topImg" src={PF + currentUser.profilePic} alt="" />
+              <img
+                className="topImg"
+                src={PF + currentUser.profilePic}
+                alt=""
+              />
             ) : (
-              <img className="topImg" src="https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" />
+              <img
+                className="topImg"
+                src="https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+                alt=""
+              />
             )}
           </Link>
         ) : (
@@ -68,8 +81,33 @@ export default function Topbar({ currentUser }) {
             </li>
           </ul>
         )}
-        <i className="topSearchIcon fas fa-search"></i>
+      <i className="topMenuIcon fas fa-bars" onClick={toggleMobileMenu}></i>
       </div>
+      {mobileMenuOpen && (
+        <div className="mobileMenu">
+          <ul className="topList mobile">
+            <li className="topListItem">
+              <Link className="link" to="/">
+                HOME
+              </Link>
+            </li>
+            <li className="topListItem">ABOUT</li>
+            <li className="topListItem">CONTACT</li>
+            {currentUser && (
+              <>
+                <li className="topListItem">
+                  <Link className="link" to="/write">
+                    WRITE
+                  </Link>
+                </li>
+                <li className="topListItem" onClick={handleLogout}>
+                  LOGOUT
+                </li>
+              </>
+            )}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

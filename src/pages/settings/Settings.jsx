@@ -7,6 +7,24 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import "./settings.css";
 
 export default function Settings() {
+
+
+  const [showSidebar, setShowSidebar] = useState(true);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setShowSidebar(window.innerWidth > 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const [userData, setUserData] = useState({
     id: "",
     username: "",
@@ -122,7 +140,7 @@ export default function Settings() {
           </button>
         </form>
       </div>
-      <Sidebar />
+      {showSidebar && <Sidebar />}
       <ToastContainer />
     </div>
   );

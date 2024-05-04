@@ -9,6 +9,21 @@ import axios from "axios";
 export default function Homepage() {
   const [posts, setPosts] = useState([]);
   const { search } = useLocation();
+  const [showSidebar, setShowSidebar] = useState(true);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setShowSidebar(window.innerWidth > 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -36,7 +51,7 @@ export default function Homepage() {
       <Header />
       <div className="home">
         <Posts posts={posts} />
-        <Sidebar />
+        {showSidebar && <Sidebar />}
       </div>
     </>
   );

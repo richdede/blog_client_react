@@ -9,6 +9,7 @@ import Register from "./pages/register/Register";
 import Settings from "./pages/settings/Settings";
 import Single from "./pages/single/Single";
 import Write from "./pages/write/Write";
+import "./index.css"
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
