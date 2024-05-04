@@ -16,8 +16,8 @@ export default function SinglePost() {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [updateMode, setUpdateMode] = useState(false);
-  const [categories, setCategories] = useState([]); // Define categories state variable
-  const [selectedCategory, setSelectedCategory] = useState(""); // Define selectedCategory state variable
+  const [categories, setCategories] = useState([]); 
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   useEffect(() => {
     const getPost = async () => {
@@ -49,7 +49,7 @@ export default function SinglePost() {
       }
     };
     fetchCategories();
-  }, []); // Fetch categories on component mount
+  }, []);
 
   const handleDelete = async () => {
     try {
@@ -72,7 +72,7 @@ export default function SinglePost() {
         {
           title,
           description: desc,
-          category_id: selectedCategory, // Include the selected category ID
+          category_id: selectedCategory,
         },
         {
           headers: {
@@ -97,7 +97,7 @@ export default function SinglePost() {
     }
   };
 
-  if (!post || !author || !currentUser) {
+  if (!post || !author ) {
     return <div>Loading...</div>;
   }
 
@@ -128,7 +128,7 @@ export default function SinglePost() {
         ) : (
           <h1 className="singlePostTitle">
             {post.title}
-            {currentUser.username === author.username && (
+            {currentUser && currentUser.username === author.username && (
               <div className="singlePostEdit">
                 <i
                   className="singlePostIcon far fa-edit"

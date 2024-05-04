@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "./sidebar.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import about from "../../assets/about-me.png";
 
 export default function Sidebar() {
   const [categories, setCategories] = useState([]);
@@ -22,13 +23,10 @@ export default function Sidebar() {
     <div className="sidebar">
       <div className="sidebarItem">
         <span className="sidebarTitle">ABOUT ME</span>
-        <img
-          src="https://images.pexels.com/photos/1167355/pexels-photo-1167355.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-          alt=""
-        />
+        <img src={about} alt="" />
         <p>
-          Laboris sunt aute cupidatat velit magna velit ullamco dolore mollit
-          amet ex esse.Sunt eu ut nostrud id quis proident.
+          As a software engineer, I am passionate about using technology to
+          solve complex problems and improve people's lives.
         </p>
       </div>
       <div className="sidebarItem">

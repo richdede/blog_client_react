@@ -8,9 +8,9 @@ export default function Topbar({ currentUser }) {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userData");
+    navigate("/");
     window.location.reload();
     setTimeout(() => {
-      navigate("/");
     }, 2000);
   };
 

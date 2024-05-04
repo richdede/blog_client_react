@@ -46,7 +46,7 @@ function App() {
           element={<Login onUserLogin={handleUserLogin} />}
         />
         <Route path="/write" element={<Write />} />
-        <Route path="/settings" element={<Settings />} />
+        <Route path="/settings" element={<Settings />}  />
         <Route path="/post/:postId" element={<Single />} />
       </Routes>
       <ToastContainer />
