@@ -4,9 +4,15 @@ import "./post.css";
 
 export default function Post({ post }) {
   const PF = "http://localhost:8000";
+  const defaultImage = "https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500";
+
   return (
     <div className="post">
-      {post.photo && <img className="postImg" src={PF + post.photo} alt="" />}
+      {post.photo && post.photo !== "null" ? (
+        <img className="postImg" src={PF + post.photo} alt={post.title} />
+      ) : (
+        <img className="postImg" src={defaultImage} alt={post.title} />
+      )}
 
       <div className="postInfo">
         <div className="postCats">
