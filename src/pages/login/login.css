@@ -55,7 +55,12 @@
   background-color: teal;
   cursor: pointer;
   padding: 10px;
-  border: none;
   color: white;
+  border: none;
   border-radius: 10px;
+}
+
+.linkr {
+  color: white;
+  text-decoration: none;
 }

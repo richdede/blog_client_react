@@ -37,10 +37,19 @@
   list-style: none;
 }
 
+.link {
+  text-decoration: none;
+  color: black;
+}
+
+.link:hover{
+  color: gray;
+}
+
 .topListItem {
   margin-right: 20px;
   font-size: 18px;
-  font-weight: 300;
+  font-weight: 600;
   cursor: pointer;
 }
 

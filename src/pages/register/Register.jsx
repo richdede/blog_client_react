@@ -77,7 +77,7 @@ export default function Register({ onUserLogin }) {
         </button>
       </form>
       <button className="registerLoginButton">
-        <Link className="link" to="/login">
+        <Link className="linkr" to="/login">
           Login
         </Link>
       </button>
