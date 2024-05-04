@@ -16,18 +16,19 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      setCurrentUser({ token });
+      const userData = JSON.parse(localStorage.getItem("userData"));
+      setCurrentUser({ token, ...userData }); 
     }
   }, []);
 
-  const handleUserLogin = (token) => {
-    localStorage.removeItem("token");
-    localStorage.setItem("token", token);
-    setCurrentUser({ token });
+  const handleUserLogin = (userData) => {
+    localStorage.setItem("userData", JSON.stringify(userData));
+    setCurrentUser(userData);
   };
 
   const handleUserLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("userData");
     setCurrentUser(null);
   };
 

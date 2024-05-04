@@ -2,10 +2,10 @@ import { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./register.css";
 import { Link, useNavigate } from "react-router-dom";
+import "./register.css";
 
-export default function Register() {
+export default function Register({ onUserLogin }) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,9 +22,10 @@ export default function Register() {
           password,
         }
       );
-      localStorage.removeItem("token");
+      const userData = response.data.user;
+      onUserLogin(userData);
       localStorage.setItem("token", response.data.access_token);
-      toast.success("Registration successful. Please log in.");
+      toast.success("Registration successful.");
       setTimeout(() => {
         navigate("/");
         window.location.reload();
@@ -42,7 +43,6 @@ export default function Register() {
       }
     }
   };
-  
 
   return (
     <div className="register">

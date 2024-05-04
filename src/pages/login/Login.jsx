@@ -1,11 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./login.css";
 
-export default function Login() {
+export default function Login({ onUserLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -17,7 +17,8 @@ export default function Login() {
         email,
         password,
       });
-      localStorage.removeItem("token");
+      const userData = response.data.user;
+      onUserLogin(userData);
       localStorage.setItem("token", response.data.access_token);
       toast.success("Login successful.");
       setTimeout(() => {
@@ -67,6 +68,7 @@ export default function Login() {
           Register
         </Link>
       </button>
+      <ToastContainer />
     </div>
   );
 }

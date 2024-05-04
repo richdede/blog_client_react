@@ -48,7 +48,7 @@ export default function SinglePost() {
           <span>
             Author:{" "}
             <b className="singlePostAuthor">
-              <Link className="link" to={`/?users=${user.id}`}>
+              <Link className="link" to={`/?user=${user.id}`}>
                 {user.username}
               </Link>
             </b>
